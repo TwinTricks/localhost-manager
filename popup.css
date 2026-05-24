@@ -454,7 +454,9 @@ body {
 }
 
 .menu button:not(.swatch) {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   width: 100%;
   text-align: left;
   background: transparent;
@@ -466,6 +468,47 @@ body {
   border-radius: var(--radius-sm);
   font-family: inherit;
 }
+
+/* Icon inside a menu item — sized smaller than header icons for visual balance */
+.menu button .menu-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  color: var(--text-muted);
+}
+.menu button .menu-icon .icon-svg { width: 14px; height: 14px; }
+.menu button:hover .menu-icon { color: var(--text); }
+.menu button.danger .menu-icon { color: var(--danger); }
+.menu button .menu-label { flex: 1; min-width: 0; }
+
+/* Icon inside primary/secondary buttons (Save / Cancel / +Add) */
+.btn-primary, .btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+}
+.btn-icon .icon-svg { width: 14px; height: 14px; }
+
+/* Quick-add banner's mini "+ Add" button */
+.btn-mini-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.btn-mini-primary .btn-icon { width: 11px; height: 11px; }
+.btn-mini-primary .btn-icon .icon-svg { width: 11px; height: 11px; }
 
 .menu button:not(.swatch):hover {
   background: var(--bg-hover);

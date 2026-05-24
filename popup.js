@@ -249,9 +249,14 @@ function renderList() {
       titleEl.classList.remove('hidden');
     }
 
-    // Pin/Unpin label
+    // Pin/Unpin label (preserve the leading icon span — only swap the label text)
     const pinBtn = node.querySelector('[data-action="toggle-pin"]');
-    pinBtn.textContent = p.pinned ? 'Unpin' : 'Pin';
+    const pinLabel = pinBtn.querySelector('.menu-label');
+    if (pinLabel) {
+      pinLabel.textContent = p.pinned ? 'Unpin' : 'Pin';
+    } else {
+      pinBtn.textContent = p.pinned ? 'Unpin' : 'Pin';
+    }
 
     // Color swatches mark active
     node.querySelectorAll('.swatch').forEach((sw) => {
@@ -775,7 +780,8 @@ els.sortMenu.addEventListener('click', async (e) => {
   await saveSettings(state.settings);
   closeAllMenus();
   renderList();
-  showToast(`Sort: ${btn.textContent}`);
+  const label = btn.querySelector('.menu-label')?.textContent || btn.textContent.trim();
+  showToast(`Sort: ${label}`);
 });
 
 // Color filter pills

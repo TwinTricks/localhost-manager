@@ -18,17 +18,17 @@
       <button id="theme-btn" class="icon-btn" title="Toggle theme" aria-label="Toggle theme"><span data-icon="sun"></span></button>
       <button id="settings-btn" class="icon-btn" title="Open settings" aria-label="Open settings"><span data-icon="settings"></span></button>
       <div id="sort-menu" class="menu hidden header-menu" role="menu">
-        <button data-sort="manual" role="menuitem">Manual order</button>
-        <button data-sort="recent" role="menuitem">Recently used</button>
-        <button data-sort="name" role="menuitem">Name A→Z</button>
-        <button data-sort="port" role="menuitem">Port low→high</button>
+        <button data-sort="manual" role="menuitem"><span class="menu-icon" data-icon="lines" aria-hidden="true"></span><span class="menu-label">Manual order</span></button>
+        <button data-sort="recent" role="menuitem"><span class="menu-icon" data-icon="clock" aria-hidden="true"></span><span class="menu-label">Recently used</span></button>
+        <button data-sort="name" role="menuitem"><span class="menu-icon" data-icon="letters" aria-hidden="true"></span><span class="menu-label">Name A→Z</span></button>
+        <button data-sort="port" role="menuitem"><span class="menu-icon" data-icon="hash" aria-hidden="true"></span><span class="menu-label">Port low→high</span></button>
       </div>
     </div>
   </header>
 
   <div id="quick-add-banner" class="quick-add-banner hidden">
     <span class="banner-text">Add this project? <strong id="banner-url">localhost</strong></span>
-    <button id="banner-add" class="btn-mini-primary">+ Add</button>
+    <button id="banner-add" class="btn-mini-primary"><span class="btn-icon" data-icon="plus" aria-hidden="true"></span><span>Add</span></button>
     <button id="banner-dismiss" class="icon-btn" title="Dismiss" aria-label="Dismiss"><span data-icon="close"></span></button>
   </div>
 
@@ -72,13 +72,13 @@
     <p id="form-warning" class="form-warning hidden"></p>
     <p id="form-error" class="form-error hidden"></p>
     <div class="form-actions">
-      <button id="f-cancel" class="btn-secondary">Cancel</button>
-      <button id="f-save" class="btn-primary">Save</button>
+      <button id="f-cancel" class="btn-secondary"><span class="btn-icon" data-icon="close" aria-hidden="true"></span><span>Cancel</span></button>
+      <button id="f-save" class="btn-primary"><span class="btn-icon" data-icon="check" aria-hidden="true"></span><span>Save</span></button>
     </div>
   </section>
 
   <footer class="app-footer">
-    <button id="add-btn" class="btn-primary full-width">+ Add project</button>
+    <button id="add-btn" class="btn-primary full-width"><span class="btn-icon" data-icon="plus" aria-hidden="true"></span><span>Add project</span></button>
   </footer>
 
   <div id="toast" class="toast hidden" role="status" aria-live="polite">
@@ -108,10 +108,10 @@
       <button class="open-btn" title="Open in new tab" aria-label="Open"><span data-icon="play"></span></button>
       <button class="menu-btn" title="More actions" aria-label="More"><span data-icon="more"></span></button>
       <div class="menu hidden" role="menu">
-        <button data-action="edit" role="menuitem">Edit</button>
-        <button data-action="duplicate" role="menuitem">Duplicate</button>
-        <button data-action="copy-url" role="menuitem">Copy URL</button>
-        <button data-action="toggle-pin" role="menuitem">Pin</button>
+        <button data-action="edit" role="menuitem"><span class="menu-icon" data-icon="edit" aria-hidden="true"></span><span class="menu-label">Edit</span></button>
+        <button data-action="duplicate" role="menuitem"><span class="menu-icon" data-icon="duplicate" aria-hidden="true"></span><span class="menu-label">Duplicate</span></button>
+        <button data-action="copy-url" role="menuitem"><span class="menu-icon" data-icon="copy" aria-hidden="true"></span><span class="menu-label">Copy URL</span></button>
+        <button data-action="toggle-pin" role="menuitem"><span class="menu-icon" data-icon="pin" aria-hidden="true"></span><span class="menu-label">Pin</span></button>
         <div class="menu-submenu-label">Color</div>
         <div class="color-swatches" data-action-group="color">
           <button class="swatch swatch-none" data-color="" title="None" aria-label="No color"></button>
@@ -123,7 +123,7 @@
           <button class="swatch" data-color="purple" style="background: var(--color-purple)" title="Purple" aria-label="Purple"></button>
           <button class="swatch" data-color="gray" style="background: var(--color-gray)" title="Gray" aria-label="Gray"></button>
         </div>
-        <button data-action="delete" role="menuitem" class="danger">Delete</button>
+        <button data-action="delete" role="menuitem" class="danger"><span class="menu-icon" data-icon="trash" aria-hidden="true"></span><span class="menu-label">Delete</span></button>
       </div>
     </div>
   </template>

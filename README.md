@@ -62,6 +62,26 @@ The manifest references `icons/icon16.png`, `icon48.png`, `icon128.png`. To gene
 
 Without icons the extension still works — Chrome shows a default puzzle-piece icon.
 
+## Icons (UI / in-popup)
+
+The popup uses an inline SVG icon library at `lib/icons.js`. Default icons are hand-coded in **Iconsax Linear** visual style (24x24 viewBox, `currentColor` stroke at 1.5px, rounded line caps) using Lucide-style geometry, which is MIT-licensed and visually near-identical to Iconsax Linear.
+
+### Overriding individual icons
+
+You can swap any built-in icon for your own SVG without editing source code:
+
+1. Save your SVG as `icons/ui/<name>.svg` inside the extension folder.
+2. Reload the extension at `chrome://extensions/`.
+3. Your file is auto-picked up the next time the popup is opened.
+
+Each override file must be a complete `<svg>` element with a `viewBox="0 0 24 24"` and use `currentColor` for `stroke` / `fill` so it inherits the surrounding text color (light/dark theme aware).
+
+### Supported icon names
+
+`logo`, `refresh`, `settings`, `sun`, `moon`, `close`, `search`, `folder`, `more`, `drag`, `play`, `sort`, `pin`, `openAll`, `plus`, `check`, `copy`, `trash`, `edit`, `duplicate`, `external`, `clock`, `lines`, `letters`, `hash`, `chevron-right`.
+
+The override directory is registered under `web_accessible_resources` in `manifest.json` (scoped to `icons/ui/*.svg` only — nothing else is exposed).
+
 ## Project schema
 
 ```ts

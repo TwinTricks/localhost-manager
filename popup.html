@@ -8,15 +8,15 @@
 <body class="theme-system">
   <header class="app-header">
     <div class="title">
-      <span class="logo" aria-hidden="true">◧</span>
+      <span class="logo" data-icon="logo" aria-hidden="true"></span>
       <span>Localhost</span>
     </div>
     <div class="actions">
-      <button id="open-all-btn" class="icon-btn" title="Open all alive projects" aria-label="Open all alive projects">⧉</button>
-      <button id="sort-btn" class="icon-btn" title="Sort projects" aria-label="Sort projects">⇅</button>
-      <button id="refresh-btn" class="icon-btn" title="Refresh status" aria-label="Refresh status">↻</button>
-      <button id="theme-btn" class="icon-btn" title="Toggle theme" aria-label="Toggle theme">◐</button>
-      <button id="settings-btn" class="icon-btn" title="Open settings" aria-label="Open settings">⚙</button>
+      <button id="open-all-btn" class="icon-btn" title="Open all alive projects" aria-label="Open all alive projects"><span data-icon="openAll"></span></button>
+      <button id="sort-btn" class="icon-btn" title="Sort projects" aria-label="Sort projects"><span data-icon="sort"></span></button>
+      <button id="refresh-btn" class="icon-btn" title="Refresh status" aria-label="Refresh status"><span data-icon="refresh"></span></button>
+      <button id="theme-btn" class="icon-btn" title="Toggle theme" aria-label="Toggle theme"><span data-icon="sun"></span></button>
+      <button id="settings-btn" class="icon-btn" title="Open settings" aria-label="Open settings"><span data-icon="settings"></span></button>
       <div id="sort-menu" class="menu hidden header-menu" role="menu">
         <button data-sort="manual" role="menuitem">Manual order</button>
         <button data-sort="recent" role="menuitem">Recently used</button>
@@ -29,12 +29,12 @@
   <div id="quick-add-banner" class="quick-add-banner hidden">
     <span class="banner-text">Add this project? <strong id="banner-url">localhost</strong></span>
     <button id="banner-add" class="btn-mini-primary">+ Add</button>
-    <button id="banner-dismiss" class="icon-btn" title="Dismiss" aria-label="Dismiss">✕</button>
+    <button id="banner-dismiss" class="icon-btn" title="Dismiss" aria-label="Dismiss"><span data-icon="close"></span></button>
   </div>
 
   <div class="search-bar">
     <input id="search" type="text" placeholder="Search projects... (press /)" autocomplete="off" spellcheck="false">
-    <button id="search-clear" class="icon-btn hidden" title="Clear search" aria-label="Clear search">✕</button>
+    <button id="search-clear" class="icon-btn hidden" title="Clear search" aria-label="Clear search"><span data-icon="close"></span></button>
   </div>
 
   <div id="color-filters" class="color-filters hidden"></div>
@@ -42,13 +42,13 @@
   <main id="list" class="project-list" aria-live="polite"></main>
 
   <section id="empty-state" class="empty-state hidden">
-    <div class="empty-icon" aria-hidden="true">📋</div>
+    <div class="empty-icon" data-icon="folder" aria-hidden="true"></div>
     <h2>No projects yet</h2>
     <p>Add your first localhost project to get started.</p>
   </section>
 
   <section id="no-results" class="empty-state hidden">
-    <div class="empty-icon" aria-hidden="true">🔍</div>
+    <div class="empty-icon" data-icon="search" aria-hidden="true"></div>
     <h2>No matches</h2>
     <p>Try a different search term.</p>
   </section>
@@ -88,14 +88,14 @@
 
   <template id="project-row-tpl">
     <div class="project-row" data-id="">
-      <div class="drag-handle" title="Drag to reorder" aria-hidden="true">⋮⋮</div>
+      <div class="drag-handle" data-icon="drag" title="Drag to reorder" aria-hidden="true"></div>
       <div class="status-indicator">
         <div class="status-dot" data-status="unknown" title="Unknown"></div>
         <img class="favicon hidden" width="14" height="14" alt="">
       </div>
       <div class="project-info">
         <div class="project-name">
-          <span class="pin-glyph hidden" aria-hidden="true">📌</span>
+          <span class="pin-glyph hidden" data-icon="pin" aria-hidden="true"></span>
           <span class="name-text"></span>
         </div>
         <div class="project-meta">
@@ -105,8 +105,8 @@
         </div>
         <div class="project-title hidden"></div>
       </div>
-      <button class="open-btn" title="Open in new tab" aria-label="Open">▶</button>
-      <button class="menu-btn" title="More actions" aria-label="More">⋯</button>
+      <button class="open-btn" title="Open in new tab" aria-label="Open"><span data-icon="play"></span></button>
+      <button class="menu-btn" title="More actions" aria-label="More"><span data-icon="more"></span></button>
       <div class="menu hidden" role="menu">
         <button data-action="edit" role="menuitem">Edit</button>
         <button data-action="duplicate" role="menuitem">Duplicate</button>

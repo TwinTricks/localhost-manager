@@ -9,6 +9,7 @@ import {
   VALID_COLORS, VALID_SORTS,
 } from './lib/storage.js';
 import { faviconUrl } from './lib/ping.js';
+import { applyIcons } from './lib/icons.js';
 
 const $ = (id) => document.getElementById(id);
 const els = {
@@ -260,6 +261,8 @@ function renderList() {
 
     els.list.appendChild(node);
   }
+
+  applyIcons(els.list);
 }
 
 // ---------- Menus ----------
@@ -635,6 +638,7 @@ async function maybeShowQuickAddBanner() {
 
 async function init() {
   try {
+    applyIcons(); // hydrate icons in static HTML before first paint
     state.settings = await getSettings();
     applyTheme(state.settings.theme);
 

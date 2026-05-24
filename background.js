@@ -38,19 +38,22 @@ async function updateBadge(aliveCount) {
 
 async function pingAll() {
   const [projects, settings] = await Promise.all([getProjects(), getSettings()]);
-  const results = await Promise.all(
-    projects.map(async (p) => {
-      const res = await pingPort(p.port, { timeoutMs: settings.pingTimeoutMs });
-      let extras = { hasFavicon: false, title: null };
-      if (res.alive) {
-        extras = await enrichAlive(p.port, res.protocol || 'http');
-      }
-      const status = { ...res, ...extras, checkedAt: Date.now() };
-      await setStatus(p.id, status);
-      return { id: p.id, ...status };
-    })
-  );
+  console.log(`[pingAll] starting, ${projects.length} projects`);
+  const results = [];
+  // Sequential: parallel fetches to localhost seem to hit some kind of
+  // SW connection/throttling issue. Sequential one-at-a-time works reliably.
+  for (const p of projects) {
+    const res = await pingPort(p.port, { timeoutMs: settings.pingTimeoutMs });
+    let extras = { hasFavicon: false, title: null };
+    if (res.alive) {
+      extras = await enrichAlive(p.port, res.protocol || 'http');
+    }
+    const status = { ...res, ...extras, checkedAt: Date.now() };
+    await setStatus(p.id, status);
+    results.push({ id: p.id, ...status });
+  }
   const aliveCount = results.filter((r) => r.alive).length;
+  console.log(`[pingAll] done, ${aliveCount} alive of ${projects.length}`);
   await updateBadge(aliveCount);
   return results;
 }

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Localhost Manager</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body class="theme-system">
+  <header class="app-header">
+    <div class="title">
+      <span class="logo" aria-hidden="true">◧</span>
+      <span>Localhost</span>
+    </div>
+    <div class="actions">
+      <button id="open-all-btn" class="icon-btn" title="Open all alive projects" aria-label="Open all alive projects">⧉</button>
+      <button id="sort-btn" class="icon-btn" title="Sort projects" aria-label="Sort projects">⇅</button>
+      <button id="refresh-btn" class="icon-btn" title="Refresh status" aria-label="Refresh status">↻</button>
+      <button id="theme-btn" class="icon-btn" title="Toggle theme" aria-label="Toggle theme">◐</button>
+      <button id="settings-btn" class="icon-btn" title="Open settings" aria-label="Open settings">⚙</button>
+      <div id="sort-menu" class="menu hidden header-menu" role="menu">
+        <button data-sort="manual" role="menuitem">Manual order</button>
+        <button data-sort="recent" role="menuitem">Recently used</button>
+        <button data-sort="name" role="menuitem">Name A→Z</button>
+        <button data-sort="port" role="menuitem">Port low→high</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="quick-add-banner" class="quick-add-banner hidden">
+    <span class="banner-text">Add this project? <strong id="banner-url">localhost</strong></span>
+    <button id="banner-add" class="btn-mini-primary">+ Add</button>
+    <button id="banner-dismiss" class="icon-btn" title="Dismiss" aria-label="Dismiss">✕</button>
+  </div>
+
+  <div class="search-bar">
+    <input id="search" type="text" placeholder="Search projects... (press /)" autocomplete="off" spellcheck="false">
+    <button id="search-clear" class="icon-btn hidden" title="Clear search" aria-label="Clear search">✕</button>
+  </div>
+
+  <div id="color-filters" class="color-filters hidden"></div>
+
+  <main id="list" class="project-list" aria-live="polite"></main>
+
+  <section id="empty-state" class="empty-state hidden">
+    <div class="empty-icon" aria-hidden="true">📋</div>
+    <h2>No projects yet</h2>
+    <p>Add your first localhost project to get started.</p>
+  </section>
+
+  <section id="no-results" class="empty-state hidden">
+    <div class="empty-icon" aria-hidden="true">🔍</div>
+    <h2>No matches</h2>
+    <p>Try a different search term.</p>
+  </section>
+
+  <section id="add-form" class="add-form hidden" aria-labelledby="form-title">
+    <h3 id="form-title">Add project</h3>
+    <label class="field">
+      <span>Name</span>
+      <input id="f-name" type="text" placeholder="e.g. My Blog" maxlength="50" autocomplete="off">
+    </label>
+    <div class="row">
+      <label class="field">
+        <span>Port</span>
+        <input id="f-port" type="number" placeholder="3000" min="1" max="65535" autocomplete="off">
+      </label>
+      <label class="field flex-2">
+        <span>Path (optional)</span>
+        <input id="f-path" type="text" placeholder="/admin" maxlength="200" autocomplete="off">
+      </label>
+    </div>
+    <p id="form-warning" class="form-warning hidden"></p>
+    <p id="form-error" class="form-error hidden"></p>
+    <div class="form-actions">
+      <button id="f-cancel" class="btn-secondary">Cancel</button>
+      <button id="f-save" class="btn-primary">Save</button>
+    </div>
+  </section>
+
+  <footer class="app-footer">
+    <button id="add-btn" class="btn-primary full-width">+ Add project</button>
+  </footer>
+
+  <div id="toast" class="toast hidden" role="status" aria-live="polite">
+    <span id="toast-text"></span>
+    <button id="toast-action" class="toast-action hidden">Undo</button>
+  </div>
+
+  <template id="project-row-tpl">
+    <div class="project-row" data-id="">
+      <div class="drag-handle" title="Drag to reorder" aria-hidden="true">⋮⋮</div>
+      <div class="status-indicator">
+        <div class="status-dot" data-status="unknown" title="Unknown"></div>
+        <img class="favicon hidden" width="14" height="14" alt="">
+      </div>
+      <div class="project-info">
+        <div class="project-name">
+          <span class="pin-glyph hidden" aria-hidden="true">📌</span>
+          <span class="name-text"></span>
+        </div>
+        <div class="project-meta">
+          <span class="port"></span><!--
+       --><span class="path"></span><!--
+       --><span class="latency"></span>
+        </div>
+        <div class="project-title hidden"></div>
+      </div>
+      <button class="open-btn" title="Open in new tab" aria-label="Open">▶</button>
+      <button class="menu-btn" title="More actions" aria-label="More">⋯</button>
+      <div class="menu hidden" role="menu">
+        <button data-action="edit" role="menuitem">Edit</button>
+        <button data-action="duplicate" role="menuitem">Duplicate</button>
+        <button data-action="copy-url" role="menuitem">Copy URL</button>
+        <button data-action="toggle-pin" role="menuitem">Pin</button>
+        <div class="menu-submenu-label">Color</div>
+        <div class="color-swatches" data-action-group="color">
+          <button class="swatch swatch-none" data-color="" title="None" aria-label="No color"></button>
+          <button class="swatch" data-color="red" style="background: var(--color-red)" title="Red" aria-label="Red"></button>
+          <button class="swatch" data-color="orange" style="background: var(--color-orange)" title="Orange" aria-label="Orange"></button>
+          <button class="swatch" data-color="yellow" style="background: var(--color-yellow)" title="Yellow" aria-label="Yellow"></button>
+          <button class="swatch" data-color="green" style="background: var(--color-green)" title="Green" aria-label="Green"></button>
+          <button class="swatch" data-color="blue" style="background: var(--color-blue)" title="Blue" aria-label="Blue"></button>
+          <button class="swatch" data-color="purple" style="background: var(--color-purple)" title="Purple" aria-label="Purple"></button>
+          <button class="swatch" data-color="gray" style="background: var(--color-gray)" title="Gray" aria-label="Gray"></button>
+        </div>
+        <button data-action="delete" role="menuitem" class="danger">Delete</button>
+      </div>
+    </div>
+  </template>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Localhost Manager — Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body class="theme-system">
+  <main class="container">
+    <header>
+      <h1>Localhost Manager — Settings</h1>
+      <p class="muted">Configure how the extension behaves.</p>
+    </header>
+
+    <section class="card">
+      <h2>Appearance</h2>
+      <div class="field">
+        <label for="theme">Theme</label>
+        <select id="theme">
+          <option value="system">Follow system</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Status checks</h2>
+      <div class="field">
+        <label for="ping-interval">
+          Ping interval
+          <span class="muted">How often the extension checks if servers are alive.</span>
+        </label>
+        <div class="row">
+          <input id="ping-interval" type="number" min="30" max="600" step="5">
+          <span class="suffix">seconds</span>
+        </div>
+        <p class="hint">Min 30s (browser limit). Default 30s.</p>
+      </div>
+
+      <div class="field">
+        <label for="ping-timeout">
+          Ping timeout
+          <span class="muted">How long to wait for a server response before marking it dead.</span>
+        </label>
+        <div class="row">
+          <input id="ping-timeout" type="number" min="500" max="10000" step="100">
+          <span class="suffix">milliseconds</span>
+        </div>
+      </div>
+
+      <div class="field checkbox">
+        <label>
+          <input id="auto-ping" type="checkbox">
+          Auto-ping when popup opens
+        </label>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Backup &amp; restore</h2>
+      <p class="muted">Export your projects as JSON, or import from a previous export.</p>
+      <div class="button-row">
+        <button id="export-btn" class="btn-secondary">Export JSON</button>
+        <button id="import-btn" class="btn-secondary">Import JSON</button>
+        <input id="import-file" type="file" accept="application/json,.json" hidden>
+      </div>
+      <p id="import-result" class="hint"></p>
+    </section>
+
+    <section class="card">
+      <h2>Storage</h2>
+      <div class="stat-row">
+        <span>Projects saved</span>
+        <strong id="stat-count">0</strong>
+      </div>
+      <div class="stat-row">
+        <span>Storage used</span>
+        <strong id="stat-bytes">0 B</strong>
+      </div>
+    </section>
+
+    <section class="card danger-card">
+      <h2>Danger zone</h2>
+      <div class="button-row">
+        <button id="reset-btn" class="btn-danger">Reset settings to defaults</button>
+        <button id="wipe-btn" class="btn-danger">Delete all projects</button>
+      </div>
+    </section>
+
+    <footer class="muted">
+      <p>Localhost Manager v1.1.0 · Open source</p>
+    </footer>
+  </main>
+
+  <div id="toast" class="toast hidden" role="status"></div>
+
+  <script type="module" src="options.js"></script>
+</body>
+</html>
